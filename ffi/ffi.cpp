@@ -63,6 +63,8 @@ FfiResult bedrockrs_db_open(const char* path) {
         database->options.compressors[0] = new leveldb::ZlibCompressorRaw();
         database->options.compressors[1] = new leveldb::ZlibCompressor();
 
+        database->options.create_if_missing = true;
+
         database->read_options.decompress_allocator = new leveldb::DecompressAllocator();
 
         leveldb::Status status = leveldb::DB::Open(database->options, path, &database->db);
